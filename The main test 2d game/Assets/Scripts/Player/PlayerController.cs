@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Animator anim;
-
+    
     public Vector2 moveVector;
     public float speed = 2f;
     public bool faceright = true;
@@ -64,17 +64,20 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.DownArrow))
         {
-            if (onGround && rb.velocity.y <= 0.0000001)
+            if (onGround)
             {
                 jumpControl = true;
             }
         }
         else { jumpControl = false; }
-        if (jumpControl)
+        if (jumpControl )
         {
+            
             if ((jumpTime += Time.deltaTime) < jumpControlTime)
             {
+                
                 rb.AddForce(Vector2.up * jumpForce / (jumpTime * 10));
+                
             }
         }
         else { jumpTime = 0; }

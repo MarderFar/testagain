@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
 
     public LayerMask enemyLayers;
     public int attackDamage = 20;
+    public int attackDamage2 = 40;
 
     // Update is called once per frame
     void Update()
@@ -153,7 +154,7 @@ public class PlayerAttack : MonoBehaviour
             EnemySimple enemySimple = enemy.GetComponent<EnemySimple>();
             if (enemySimple != null)
             {
-                enemySimple.TakeDamage(attackDamage);
+                enemySimple.TakeDamage(attackDamage2);
             }
         }
 
