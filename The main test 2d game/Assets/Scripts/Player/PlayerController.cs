@@ -12,12 +12,17 @@ public class PlayerController : MonoBehaviour
     public bool faceright = true;
 
 
+    public HealthForPlayer PlayerHealth;
+    public int maxHealth = 100;
+    int currentHelth;
+
     public float gravity = 2f;
 
     void Start()
     {
         rb.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        currentHelth = maxHealth;
     }
 
     // Update is called once per frame
@@ -31,6 +36,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Jump();
+    }
+
+    public void TakeDamagePlayer(int playerDamage)
+    {
+        PlayerHealth.currentHealthPlayer -= playerDamage;
+        //animator.SetTrigger("Hurt");
+
+        if (currentHelth <= 0)
+        {
+            //Die();
+        }
     }
     void Reflect()
     {

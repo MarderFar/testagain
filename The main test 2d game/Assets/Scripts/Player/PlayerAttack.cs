@@ -19,8 +19,9 @@ public class PlayerAttack : MonoBehaviour
     public Vector2 attackRange2 = Vector2.one;
 
     public LayerMask enemyLayers;
-    public int attackDamage = 20;
+    public int attackDamage = 15;
     public int attackDamage2 = 40;
+    
 
     // Update is called once per frame
     void Update()
@@ -99,13 +100,17 @@ public class PlayerAttack : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
     }
-
+  
     public void Attack_1_inMove()
     {
+        int checks =0;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemySimple>().TakeDamage(attackDamage);
+            checks += 1;
+            Debug.Log(checks);
+
         }
     }
     public void Attack_1_moved()
