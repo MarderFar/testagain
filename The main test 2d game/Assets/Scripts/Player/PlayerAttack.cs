@@ -103,14 +103,10 @@ public class PlayerAttack : MonoBehaviour
   
     public void Attack_1_inMove()
     {
-        int checks =0;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<EnemySimple>().TakeDamage(attackDamage);
-            checks += 1;
-            Debug.Log(checks);
-
         }
     }
     public void Attack_1_moved()
