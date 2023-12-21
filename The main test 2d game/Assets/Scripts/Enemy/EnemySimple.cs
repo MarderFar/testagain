@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -26,6 +27,16 @@ public class EnemySimple : MonoBehaviour
 
     Transform player;
     public float speed;
+
+    //Patrol
+    public int positionOfPatrol;
+    public Transform point;
+    public bool movingRight;
+    public bool chill = false;
+    public bool angry = false;
+    public bool goBack = false;
+    public int stoppingDistance;
+    public Transform EnemyEyes;
     void Start()
     {
         currentHelth = maxHealth;
@@ -34,8 +45,9 @@ public class EnemySimple : MonoBehaviour
     }
     private void Update()
     {
-        EnemyRun();
-        Reflect();
+        EnemyPatrol();
+        //EnemyRun();
+        //Reflect();
     }
 
     public void TakeDamage(int damage)
@@ -65,9 +77,9 @@ public class EnemySimple : MonoBehaviour
         if (attackPointEnemy == null) { return; }
         Gizmos.DrawWireSphere(attackPointEnemy.position, attackRange);
     }
-    public void EnemyRun()
+/*    public void EnemyRun()
     {
-        if(animator.GetBool("isDeath") != true)
+        if (animator.GetBool("isDeath") != true)
         {
             Vector2 target = new Vector2(player.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
@@ -75,7 +87,7 @@ public class EnemySimple : MonoBehaviour
         }
 
 
-        if(Vector2.Distance(player.position, rb.position) <= attackRange*2)
+        if (Vector2.Distance(player.position, rb.position) <= attackRange * 2)
         {
             if (Time.time >= nextAttackTime)
             {
@@ -87,12 +99,12 @@ public class EnemySimple : MonoBehaviour
     }
     void Reflect()
     {
-        if ((transform.position.x < player.position.x && !faceright) || (transform.position.x > player.position.x && faceright) && animator.GetBool("isDeath") != true)
+        if ((transform.position.x < player.position.x && !faceright && chill != true && animator.GetBool("isDeath") != true) || (transform.position.x > player.position.x && faceright && chill != true && animator.GetBool("isDeath") != true))
         {
             transform.Rotate(0, 180, 0);
             faceright = !faceright;
         }
-    }
+    }*/
     public void EnemyAttack_1()
     {
 
@@ -102,5 +114,76 @@ public class EnemySimple : MonoBehaviour
             Debug.Log(enemyDamage);
             PlayerCollider.GetComponent<PlayerController>().TakeDamagePlayer(enemyDamage);
         }
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && (Vector2.Distance(transform.position, player.position) < stoppingDistance) && goBack == false && animator.GetBool("isDeath") != true) { angry = true; goBack = false; chill = false; speed = 0.7f; }
+    }
+    public void EnemyPatrol()
+    {
+        if (animator.GetBool("isDeath")) { angry = false; goBack = false; chill = false; }
+
+        if (Vector2.Distance(transform.position, point.position) < positionOfPatrol && angry == false && animator.GetBool("isDeath") != true) { chill = true; goBack = false; speed = 0.3f; }
+
+        if (Vector2.Distance(transform.position, point.position) > stoppingDistance && animator.GetBool("isDeath") != true) { goBack = true; angry = false; chill = false; speed = 0.3f; }
+
+        if (chill)
+        {
+            Patrol(point.position + new Vector3(positionOfPatrol, 0, 0), point.position - new Vector3(positionOfPatrol, 0, 0));
+        }
+        else if (angry)
+        {
+            MoveTowards(player.position);
+            if (Vector2.Distance(player.position, rb.position) <= attackRange * 2)
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    animator.SetTrigger("EnemyAttack_1");
+                    nextAttackTime = Time.time + 1f / attackRate;
+                }
+
+            }
+        }
+        else if (goBack)
+        {
+            
+            MoveTowards(point.position);
+        }
+    }
+
+    private void Patrol(Vector3 patrolPointRight, Vector3 patrolPointLeft)
+    {
+        if (transform.position.x > patrolPointRight.x)
+        {
+            movingRight = false;
+            Flip();
+        }
+        else if (transform.position.x < patrolPointLeft.x)
+        {
+            movingRight = true;
+            Flip();
+        }
+
+        if (movingRight) { transform.position = new Vector2(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y); }
+        else { transform.position = new Vector2(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y); }
+    }
+
+    private void MoveTowards(Vector3 target)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
+        if (transform.position.x > target.x && faceright)
+        {
+            Flip();
+        }
+        else if (transform.position.x < target.x && !faceright)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        transform.Rotate(0, 180, 0);
+        faceright = !faceright;
     }
 }
