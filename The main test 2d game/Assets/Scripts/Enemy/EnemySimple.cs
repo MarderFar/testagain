@@ -31,12 +31,15 @@ public class EnemySimple : MonoBehaviour
     //Patrol
     public int positionOfPatrol;
     public Transform point;
-    public bool movingRight;
+    [SerializeField]  private bool movingRight;
     public bool chill = false;
     public bool angry = false;
     public bool goBack = false;
-    public int stoppingDistance;
+    [SerializeField] private int stoppingDistance;
     public Transform EnemyEyes;
+
+    [SerializeField] private float speedAngry;
+    [SerializeField] private float speedChill;
     void Start()
     {
         currentHelth = maxHealth;
@@ -69,7 +72,7 @@ public class EnemySimple : MonoBehaviour
         Debug.Log("enemy died");
         animator.SetBool("isDeath", true);
 
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezePositionX;
         coll.enabled = false;
     }
     private void OnDrawGizmosSelected()
@@ -117,15 +120,34 @@ public class EnemySimple : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && (Vector2.Distance(transform.position, player.position) < stoppingDistance) && goBack == false && animator.GetBool("isDeath") != true) { angry = true; goBack = false; chill = false; speed = 0.7f; }
+        if (collision.CompareTag("Player") && (Vector2.Distance(transform.position, player.position) < stoppingDistance) && !goBack && !animator.GetBool("isDeath"))
+        {
+            angry = true;
+            goBack = false;
+            chill = false;
+            speed = speedAngry;
+        }
     }
     public void EnemyPatrol()
     {
-        if (animator.GetBool("isDeath")) { angry = false; goBack = false; chill = false; }
+        if (animator.GetBool("isDeath")) { angry = false; goBack = false; chill = false;  }
 
-        if (Vector2.Distance(transform.position, point.position) < positionOfPatrol && angry == false && animator.GetBool("isDeath") != true) { chill = true; goBack = false; speed = 0.3f; }
+        //Условие для срабатывания chill
+        if (Vector2.Distance(transform.position, point.position) < positionOfPatrol && !angry && !animator.GetBool("isDeath"))
+        {
+            chill = true;
+            goBack = false;
+            speed = speedChill;
+        }
 
-        if (Vector2.Distance(transform.position, point.position) > stoppingDistance && animator.GetBool("isDeath") != true) { goBack = true; angry = false; chill = false; speed = 0.3f; }
+        //Условие для срабатывания goBack
+        if (Vector2.Distance(transform.position, point.position) > stoppingDistance && !animator.GetBool("isDeath"))
+        {
+            goBack = true;
+            angry = false;
+            chill = false;
+            speed = speedChill;
+        }
 
         if (chill)
         {
@@ -146,10 +168,15 @@ public class EnemySimple : MonoBehaviour
         }
         else if (goBack)
         {
-            
+
+                currentHelth = maxHealth;
+                HealthBar.SetHelth(currentHelth, maxHealth);
+
             MoveTowards(point.position);
         }
     }
+
+
 
     private void Patrol(Vector3 patrolPointRight, Vector3 patrolPointLeft)
     {

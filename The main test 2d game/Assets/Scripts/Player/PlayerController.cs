@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         Reflect();
         CheckingGround();
         PlatwormDown();
+
     }
     private void FixedUpdate()
     {
@@ -76,34 +77,41 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-
-
-        if (Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.DownArrow))
-        {
-            if (onGround)
+        if (!Input.GetKey(KeyCode.DownArrow) || (!rb.IsTouchingLayers(PlatformMask) && !Physics2D.OverlapBox(groundCheckTransform.position, groundCheckSize, 0f, PlatformMask)))
+            if (Input.GetKey(KeyCode.Space))
             {
-                jumpControl = true;
+                if (onGround)
+                {
+                    jumpControl = true;
+                }
+
             }
-        }
-        else { jumpControl = false; }
-        if (jumpControl )
-        {
-            
-            if ((jumpTime += Time.deltaTime) < jumpControlTime)
+            else { jumpControl = false; }
+            if (jumpControl)
             {
-                
-                rb.AddForce(Vector2.up * jumpForce / (jumpTime * 10));
-                
+
+                if ((jumpTime += Time.deltaTime) < jumpControlTime)
+                {
+
+                    rb.AddForce(Vector2.up * jumpForce / (jumpTime * 10));
+
+                }
             }
-        }
-        else { jumpTime = 0; }
+            else { jumpTime = 0; }
+        
+
+       
+        
     }
     void PlatwormDown()
     {
         if (Input.GetKey(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.Space))
         {
-            Physics2D.IgnoreLayerCollision(7, 8, true);
-            Invoke("IgnoreLayerOff", 0.35f);
+            if (rb.IsTouchingLayers(PlatformMask) && Physics2D.OverlapBox(groundCheckTransform.position, groundCheckSize, 0f, PlatformMask))
+            {
+                Physics2D.IgnoreLayerCollision(7, 8, true);
+                Invoke("IgnoreLayerOff", 0.35f);
+            }
         }
     }
     void IgnoreLayerOff()
@@ -111,7 +119,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(7, 8, false);
     }
 
-
+    [SerializeField] private LayerMask PlatformMask;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Vector2 groundCheckSize = Vector2.one;
     [SerializeField] private Transform groundCheckTransform;
