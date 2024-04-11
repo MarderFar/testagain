@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -47,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 31
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2500,122 +2506,121 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tiles_97: 1766942156
-      Tiles_69: -52858107
-      Tiles_102: 111984448
-      Tiles_98: 1779282646
-      Tiles_1: 1536900992
-      Tiles_84: -1893085892
       Tiles_0: -77838339
-      Tiles_91: -2042711217
-      Tiles_5: 946715319
-      Tiles_39: -1949970537
-      Tiles_35: 1247714102
-      Tiles_6: 861634387
-      Tiles_17: -396546092
-      Tiles_46: 1134368940
-      Tiles_42: -1868139265
-      Tiles_86: -1710713839
-      Tiles_16: -868942881
-      Tiles_71: -497746249
-      Tiles_110: -1865574552
-      Tiles_60: 536254454
-      Tiles_106: 711542961
-      Tiles_11: 1010494867
-      Tiles_15: -240084523
-      Tiles_34: 56158341
-      Tiles_63: 583822050
-      Tiles_2: 2114578255
-      Tiles_93: -1134015222
-      Tiles_55: 418562671
-      Tiles_21: 1622613779
-      Tiles_51: -2130010
-      Tiles_108: 307863118
-      Tiles_14: 420478296
-      Tiles_112: -1133367914
-      Tiles_18: 1561902389
-      Tiles_65: 1570701075
-      Tiles_82: -479794606
-      Tiles_67: 510424814
-      Tiles_92: -362050745
-      Tiles_47: -1629848677
-      Tiles_31: 426262125
-      Tiles_30: 1613474705
-      Tiles_76: 1033595900
-      Tiles_61: -1543473259
-      Tiles_74: 1951491305
-      Tiles_13: 306920812
-      Tiles_37: 585602227
-      Tiles_90: -957220495
-      Tiles_19: 993947050
-      Tiles_99: 1323432166
-      Tiles_12: -236482090
-      Tiles_64: 547390388
-      Tiles_48: -1950998675
-      Tiles_68: 1340580677
-      Tiles_96: -2087617745
-      Tiles_72: 46291396
-      Tiles_3: 246311808
-      Tiles_107: -332665282
-      Tiles_36: -1665895386
+      Tiles_1: 1536900992
       Tiles_10: -1738519498
-      Tiles_43: -751496642
-      Tiles_83: 1931107961
-      Tiles_89: 905512971
-      Tiles_95: 117686376
-      Tiles_41: -835830475
-      Tiles_50: 896345375
-      Tiles_57: 2121560067
-      Tiles_78: 1087279864
-      Tiles_44: 999681190
-      Tiles_77: -60007021
-      Tiles_59: -1647617654
-      Tiles_62: 14340216
-      Tiles_56: -778779483
-      Tiles_79: -1222046903
-      Tiles_105: 1474767832
-      Tiles_25: 1758748683
-      Tiles_38: 739752408
-      Tiles_66: -2051104716
-      Tiles_94: 669333818
-      Tiles_103: 74414176
-      Tiles_111: 1529562217
-      Tiles_23: -1332702442
-      Tiles_87: 2063789164
-      Tiles_26: -734072679
-      Tiles_109: 1439511722
+      Tiles_100: 2117193463
       Tiles_101: -1703664229
-      Tiles_20: -325350757
-      Tiles_54: -1176983798
-      Tiles_22: -11991963
-      Tiles_27: -1392763721
-      Tiles_29: 426647803
-      Tiles_73: 2098638360
-      Tiles_45: 720887397
-      Tiles_85: 611792877
-      Tiles_24: 938098700
-      Tiles_70: -1387656762
-      Tiles_32: -1906057236
-      Tiles_58: -1095481046
+      Tiles_102: 111984448
+      Tiles_103: 74414176
       Tiles_104: 1869539521
-      Tiles_81: 761810018
+      Tiles_105: 1474767832
+      Tiles_106: 711542961
+      Tiles_107: -332665282
+      Tiles_108: 307863118
+      Tiles_109: 1439511722
+      Tiles_11: 1010494867
+      Tiles_110: -1865574552
+      Tiles_111: 1529562217
+      Tiles_112: -1133367914
+      Tiles_12: -236482090
+      Tiles_13: 306920812
+      Tiles_14: 420478296
+      Tiles_15: -240084523
+      Tiles_16: -868942881
+      Tiles_17: -396546092
+      Tiles_18: 1561902389
+      Tiles_19: 993947050
+      Tiles_2: 2114578255
+      Tiles_20: -325350757
+      Tiles_21: 1622613779
+      Tiles_22: -11991963
+      Tiles_23: -1332702442
+      Tiles_24: 938098700
+      Tiles_25: 1758748683
+      Tiles_26: -734072679
+      Tiles_27: -1392763721
       Tiles_28: -728576553
-      Tiles_52: -461405901
-      Tiles_9: -1981267851
-      Tiles_49: -1798721550
-      Tiles_88: -1433416630
-      Tiles_75: 1739682223
-      Tiles_7: -919146872
+      Tiles_29: 426647803
+      Tiles_3: 246311808
+      Tiles_30: 1613474705
+      Tiles_31: 426262125
+      Tiles_32: -1906057236
+      Tiles_33: 339825299
+      Tiles_34: 56158341
+      Tiles_35: 1247714102
+      Tiles_36: -1665895386
+      Tiles_37: 585602227
+      Tiles_38: 739752408
+      Tiles_39: -1949970537
       Tiles_4: 108024627
       Tiles_40: 742283064
+      Tiles_41: -835830475
+      Tiles_42: -1868139265
+      Tiles_43: -751496642
+      Tiles_44: 999681190
+      Tiles_45: 720887397
+      Tiles_46: 1134368940
+      Tiles_47: -1629848677
+      Tiles_48: -1950998675
+      Tiles_49: -1798721550
+      Tiles_5: 946715319
+      Tiles_50: 896345375
+      Tiles_51: -2130010
+      Tiles_52: -461405901
       Tiles_53: 1726832019
-      Tiles_33: 339825299
-      Tiles_100: 2117193463
-      Tiles_80: 1395191676
+      Tiles_54: -1176983798
+      Tiles_55: 418562671
+      Tiles_56: -778779483
+      Tiles_57: 2121560067
+      Tiles_58: -1095481046
+      Tiles_59: -1647617654
+      Tiles_6: 861634387
+      Tiles_60: 536254454
+      Tiles_61: -1543473259
+      Tiles_62: 14340216
+      Tiles_63: 583822050
+      Tiles_64: 547390388
+      Tiles_65: 1570701075
+      Tiles_66: -2051104716
+      Tiles_67: 510424814
+      Tiles_68: 1340580677
+      Tiles_69: -52858107
+      Tiles_7: -919146872
+      Tiles_70: -1387656762
+      Tiles_71: -497746249
+      Tiles_72: 46291396
+      Tiles_73: 2098638360
+      Tiles_74: 1951491305
+      Tiles_75: 1739682223
+      Tiles_76: 1033595900
+      Tiles_77: -60007021
+      Tiles_78: 1087279864
+      Tiles_79: -1222046903
       Tiles_8: -239054324
-  spritePackingTag: 
+      Tiles_80: 1395191676
+      Tiles_81: 761810018
+      Tiles_82: -479794606
+      Tiles_83: 1931107961
+      Tiles_84: -1893085892
+      Tiles_85: 611792877
+      Tiles_86: -1710713839
+      Tiles_87: 2063789164
+      Tiles_88: -1433416630
+      Tiles_89: 905512971
+      Tiles_9: -1981267851
+      Tiles_90: -957220495
+      Tiles_91: -2042711217
+      Tiles_92: -362050745
+      Tiles_93: -1134015222
+      Tiles_94: 669333818
+      Tiles_95: 117686376
+      Tiles_96: -2087617745
+      Tiles_97: 1766942156
+      Tiles_98: 1779282646
+      Tiles_99: 1323432166
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

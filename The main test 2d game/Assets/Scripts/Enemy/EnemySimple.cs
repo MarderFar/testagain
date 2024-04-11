@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -31,7 +32,7 @@ public class EnemySimple : MonoBehaviour
     //Patrol
     public int positionOfPatrol;
     public Transform point;
-    [SerializeField]  private bool movingRight;
+    [SerializeField] private bool movingRight;
     public bool chill = false;
     public bool angry = false;
     public bool goBack = false;
@@ -80,38 +81,38 @@ public class EnemySimple : MonoBehaviour
         if (attackPointEnemy == null) { return; }
         Gizmos.DrawWireSphere(attackPointEnemy.position, attackRange);
     }
-/*    public void EnemyRun()
-    {
-        if (animator.GetBool("isDeath") != true)
+    /*    public void EnemyRun()
         {
-            Vector2 target = new Vector2(player.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
-        }
-
-
-        if (Vector2.Distance(player.position, rb.position) <= attackRange * 2)
-        {
-            if (Time.time >= nextAttackTime)
+            if (animator.GetBool("isDeath") != true)
             {
-                animator.SetTrigger("EnemyAttack_1");
-                nextAttackTime = Time.time + 1f / attackRate;
+                Vector2 target = new Vector2(player.position.x, rb.position.y);
+                Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+                rb.MovePosition(newPos);
             }
 
+
+            if (Vector2.Distance(player.position, rb.position) <= attackRange * 2)
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    animator.SetTrigger("EnemyAttack_1");
+                    nextAttackTime = Time.time + 1f / attackRate;
+                }
+
+            }
         }
-    }
-    void Reflect()
-    {
-        if ((transform.position.x < player.position.x && !faceright && chill != true && animator.GetBool("isDeath") != true) || (transform.position.x > player.position.x && faceright && chill != true && animator.GetBool("isDeath") != true))
+        void Reflect()
         {
-            transform.Rotate(0, 180, 0);
-            faceright = !faceright;
-        }
-    }*/
+            if ((transform.position.x < player.position.x && !faceright && chill != true && animator.GetBool("isDeath") != true) || (transform.position.x > player.position.x && faceright && chill != true && animator.GetBool("isDeath") != true))
+            {
+                transform.Rotate(0, 180, 0);
+                faceright = !faceright;
+            }
+        }*/
     public void EnemyAttack_1()
     {
 
-        PlayerCollider  = Physics2D.OverlapCircle(attackPointEnemy.position, attackRange, playerMask);
+        PlayerCollider = Physics2D.OverlapCircle(attackPointEnemy.position, attackRange, playerMask);
         if (PlayerCollider != null)
         {
             Debug.Log(enemyDamage);
@@ -130,7 +131,7 @@ public class EnemySimple : MonoBehaviour
     }
     public void EnemyPatrol()
     {
-        if (animator.GetBool("isDeath")) { angry = false; goBack = false; chill = false;  }
+        if (animator.GetBool("isDeath")) { angry = false; goBack = false; chill = false; }
 
         //Условие для срабатывания chill
         if (Vector2.Distance(transform.position, point.position) < positionOfPatrol && !angry && !animator.GetBool("isDeath"))
@@ -152,25 +153,31 @@ public class EnemySimple : MonoBehaviour
         if (chill)
         {
             Patrol(point.position + new Vector3(positionOfPatrol, 0, 0), point.position - new Vector3(positionOfPatrol, 0, 0));
+            animator.SetBool("AfkAttack", false);
         }
         else if (angry)
         {
-            MoveTowards(player.position);
-            if (Vector2.Distance(player.position, rb.position) <= attackRange * 2)
+            if (Vector2.Distance(player.position, rb.position) <= attackRange * 2 - 1 )
             {
+                animator.SetBool("AfkAttack", true);
                 if (Time.time >= nextAttackTime)
                 {
                     animator.SetTrigger("EnemyAttack_1");
                     nextAttackTime = Time.time + 1f / attackRate;
                 }
-
+                
+            }
+            else
+            {
+                animator.SetBool("AfkAttack", false);
+                MoveTowards(player.position);
             }
         }
         else if (goBack)
         {
 
-                currentHelth = maxHealth;
-                HealthBar.SetHelth(currentHelth, maxHealth);
+            currentHelth = maxHealth;
+            HealthBar.SetHelth(currentHelth, maxHealth);
 
             MoveTowards(point.position);
         }
@@ -191,13 +198,13 @@ public class EnemySimple : MonoBehaviour
             Flip();
         }
 
-        if (movingRight) { transform.position = new Vector2(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y); }
-        else { transform.position = new Vector2(transform.position.x - speed * Time.fixedDeltaTime, transform.position.y); }
+        if (movingRight) { transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y); }
+        else { transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y); }
     }
 
     private void MoveTowards(Vector3 target)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.fixedDeltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if (transform.position.x > target.x && faceright)
         {
             Flip();

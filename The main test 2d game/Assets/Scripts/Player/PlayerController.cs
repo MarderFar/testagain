@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("moveX", Mathf.Abs(moveVector.x));
             rb.velocity = new Vector2(moveVector.x * speed, rb.velocity.y);
             rb.gravityScale = gravity;
+            Debug.Log("Velocity.x: " + rb.velocity.x);
         }
     }
 
@@ -98,10 +99,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
             else { jumpTime = 0; }
-        
-
-       
-        
     }
     void PlatwormDown()
     {
